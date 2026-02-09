@@ -35,17 +35,17 @@ export function combatPage(content){
             12: [5],
             13: [loc('civics_garrison_tactic_raid'),4,loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
             14: [loc('trait_beast_of_burden_name'),loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
-            15: [10],
+            15: [10, 4],
             16: [loc('civics_garrison_tactic_pillage'),5,loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
             17: [loc('trait_beast_of_burden_name'),loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
-            18: [25],
+            18: [25, 30],
             19: [loc('civics_garrison_tactic_assault'),5,loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
             20: [loc('trait_beast_of_burden_name'),loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
-            21: [50],
+            21: [50, 100],
             22: [loc('civics_garrison_tactic_siege'),5,loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
             23: [loc('trait_beast_of_burden_name'),loc('wiki_combat_loot_money'),loc('wiki_combat_loot_basic'),loc('wiki_combat_loot_common'),loc('wiki_combat_loot_rare')],
             24: [loc('civics_garrison_tactic_siege')],
-            25: [999],
+            25: [999, 400],
             28: [`base loot * log(looters + 1)`],
             29: [loc('civics_gov_eco_rate')],
             30: [`floor(loot * economic rating / 100)`]
@@ -67,6 +67,7 @@ export function combatPage(content){
             23: ['warning','caution','caution','caution','caution'],
             28: ['advanced'],
             30: ['advanced'],
+            32: ['advanced'],
         }
     });
     sideMenu('add',`combat-gameplay`,`loot`,loc('wiki_combat_loot'));

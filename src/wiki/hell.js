@@ -19,7 +19,12 @@ export function hellPage(content){
         data_color: { 3: ['caution'] } });
     sideMenu('add',`hell-gameplay`,'siege',loc('wiki_hell_siege'));
 
-    infoBoxBuilder(mainContent,{ name: 'strategy', template: 'hell', paragraphs: 3 });
+    infoBoxBuilder(mainContent,{ name: 'strategy', template: 'hell', paragraphs: 5, break: [4],
+        para_data: {
+            4: [loc('resource_Soul_Gem_name')],
+            5: [[`1`], [`30`], [`10`], [`15`], [`25`], loc('wiki_hell_strategy_ambush_odds')]
+        }
+    });
     sideMenu('add',`hell-gameplay`,'strategy',loc('wiki_hell_strategy'));
 
     let soul = infoBoxBuilder(mainContent,{ name: 'soul_gem', template: 'hell', paragraphs: 4,
@@ -69,7 +74,7 @@ export function hellPage(content){
             2: ['1%',loc(`harmonic`)],
             3: ['3%'],
             4: [loc(`harmonic`),'2%','6%'],
-            5: [loc(`wiki_hell_pillar_para5d1`),12],
+            5: [loc(`wiki_hell_pillar_para5d1`),4,2],
             6: [loc(`harmonic`),`${((harmonic[0] - 1) * 100).toFixed(0)}%`,`${((harmonic[1] - 1) * 100).toFixed(0)}%`],
         },
         data_link: {
@@ -174,7 +179,7 @@ export function hellPage(content){
                     3: [(mechWeaponPower('small') * 100).toFixed(2)],
                     4: [mechSize('small'),s_cost.c,s_cost.s],
                     5: [loc(`portal_mech_equip_jumpjet`)],
-                    7: [`1%`],
+                    7: [`1`],
                     8: [loc(`portal_spire_status_fog`),loc(`portal_spire_status_dark`)],
                     9: [`100%`],
                     10: [`8%`],
@@ -367,7 +372,7 @@ export function hellPage(content){
             para_data: {
                 1: [`75%`],
                 2: [loc(`portal_mech_equip_ablative`)],
-                3: [global.race['warlord'] ? `${loc(`portal_mech_equip_stoneskin`)}, ${loc(`portal_mech_equip_shields`)}, ${loc(`portal_mech_equip_manashield`)}` : loc(`portal_mech_equip_shields`)]
+                3: [global.race['warlord'] ? `${loc(`portal_mech_equip_stoneskin`)}, ${loc(`portal_mech_equip_shields`)}, ${loc(`portal_mech_equip_manashield`)}` : loc(`portal_mech_equip_shields`), `25%`]
             }
         });
 
@@ -409,7 +414,7 @@ export function hellPage(content){
             },    
             para_data: {
                 1: [`50%`,loc(`portal_mech_chassis_spider`),loc(`portal_mech_equip_grapple`)],
-                2: [global.race['warlord'] ? `${loc(`portal_mech_equip_echo`)}, ${loc(`portal_mech_equip_flare`)}` : loc(`portal_mech_equip_flare`)]
+                2: [global.race['warlord'] ? `${loc(`portal_mech_equip_echo`)}, ${loc(`portal_mech_equip_flare`)}` : loc(`portal_mech_equip_flare`), `25%`]
             }
         });
 
@@ -531,7 +536,7 @@ export function hellPage(content){
             para_data: {
                 1: [`90%`],
                 2: global.race['warlord'] ? [`${loc(`portal_mech_equip_infrared`)}, ${loc(`portal_mech_equip_darkvision`)}`] : [loc(`portal_mech_equip_infrared`)],
-                3: [loc(`portal_mech_equip_flare`)]
+                3: [loc(`portal_mech_equip_flare`),`75%`]
             }
         });
 

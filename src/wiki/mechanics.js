@@ -52,13 +52,25 @@ export function mechanicsPage(content){
         });
         sideMenu('add',`mechanics-gameplay`,`spack`,loc('wiki_mechanics_spack'));
     }
+
+    { // Job Types
+        infoBoxBuilder(mainContent,{ name: 'job_types', template: 'mechanics', label: loc('wiki_mechanics_job_types'), paragraphs: 4, break: [3,4], h_level: 2,
+            para_data: {
+                2: [loc('wiki_mechanics_job_type_basic'), loc('wiki_mechanics_job_type_mining')],
+                3: [loc('job_farmer'), loc('job_lumberjack'), loc('job_quarry_worker'), loc('job_hunter'), loc('job_forager'), loc('job_crystal_miner'), loc('job_scavenger'), loc('wiki_mechanics_job_type_basic')],
+                4: [loc('job_quarry_worker'), loc('job_crystal_miner'), loc('job_miner'), loc('job_pit_miner'), loc('job_coal_miner'), loc('job_elysium_miner'), loc('wiki_mechanics_job_type_mining')]
+            }
+        });
+        sideMenu('add',`mechanics-gameplay`,`job_types`,loc('wiki_mechanics_job_types'));
+    }
     
     { // Default Job
         infoBoxBuilder(mainContent,{ name: 'job', template: 'mechanics', label: loc('wiki_mechanics_job'), paragraphs: 9, break: [5], h_level: 2,
             para_data: {
                 1: [loc('wiki_mechanics_job')],
                 2: ['*'],
-                3: [loc('wiki_mechanics_job')]
+                3: [loc('wiki_mechanics_job'), loc('wiki_mechanics_job_type_basic')],
+                4: [loc('wiki_mechanics_job_type_basic')]
             }
         });
         sideMenu('add',`mechanics-gameplay`,`job`,loc('wiki_mechanics_job'));
@@ -82,6 +94,23 @@ export function mechanicsPage(content){
         let subSection = createCalcSection(stress,'mechanics','job_stress',loc('wiki_mechanics_job_stress'));
         jobStressCalc(subSection);
         sideMenu('add',`mechanics-gameplay`,`job_stress`,loc('wiki_mechanics_job_stress'));
+    }
+
+    { //Population Growth
+        infoBoxBuilder(mainContent,{ name: 'pop_growth', template: 'mechanics', label: loc('wiki_mechanics_pop_growth'), paragraphs: 8, break: [2,3,5,6,8], h_level: 2,
+            para_data: {
+                1: [loc('wiki_challenges_scenarios_fasting'), loc('trait_artifical_name'), loc('trait_spongy_name'), loc('trait_parasite_name'), loc('tech_vaccine_campaign'), loc('wiki_resets_matrix')],
+                2: [loc('wiki_mechanics_pop_growth_lower_bound'), loc('wiki_mechanics_pop_growth_upper_bound')],
+                3: [loc('wiki_mechanics_pop_growth_lower_bound'), 0, 1, loc('tech_aphrodisiac'), 2, loc('tech_fertility_clinic')],
+                5: [loc('wiki_mechanics_pop_growth_valentines_day'), loc('trait_fast_growth_name'), loc('trait_spores_name'), loc('tech_fertility_clinic'),
+                    loc('arpa_genepool_replication_title'), loc('trait_promiscuous_name'), loc('wiki_challenges_scenarios_fasting'), loc('city_banquet'),
+                    loc('sign_libra'), loc('trait_high_pop_name'), loc('biome_taiga_name'), loc('planet_toxic'), loc('trait_parasite_name'), loc('evo_challenge_cataclysm'), loc('evo_challenge_orbit_decay')
+                ],
+                6: [loc('wiki_mechanics_pop_growth_upper_bound'), `3 - 2 ^ 0.25`, `1.81`],
+                8: [`0`, loc('wiki_mechanics_pop_growth_upper_bound'), loc('wiki_mechanics_pop_growth_lower_bound')]
+            }
+        });
+        sideMenu('add',`mechanics-gameplay`,`pop_growth`,loc('wiki_mechanics_pop_growth'));
     }
 
     { // Multiplier Keys
@@ -319,6 +348,25 @@ export function mechanicsPage(content){
         let subSection = createCalcSection(occupation,'mechanics','occupation');
         occupationCalc(subSection);
         sideMenu('add',`mechanics-gameplay`,`occupying`,loc('wiki_mechanics_occupying'));
+    }
+
+    { //Tech Levels
+        infoBoxBuilder(mainContent,{ name: 'tech_levels', template: 'mechanics', label: loc('wiki_mechanics_tech_levels'), paragraphs: 3, break: [2,3], h_level: 2,
+            para_data: {
+                1: [loc('wiki_tech_tree_science'), loc('wiki_tech_tree_high_tech'), loc('wiki_mechanics_tech_levels_science'), loc('wiki_mechanics_tech_levels_high_tech')],
+                2: [loc('tech_science'), loc('tech_library'), loc('tech_thesis'), loc('tech_research_grant'),
+                        global.race.universe === 'magic' ? loc('tech_magic_tomes') : loc('tech_scientific_journal'), loc('tech_adjunct_professor'), loc('tech_tesla_coil'),
+                        loc('tech_internet'), loc('tech_observatory'), loc('tech_world_collider'), global.race.universe === 'magic' ? loc('tech_sanctum') : loc('tech_laboratory'),
+                        loc('tech_virtual_assistant'), loc('tech_dimensional_readings'), loc('tech_quantum_entanglement'), global.race.universe === 'magic' ? loc('tech_expedition_wiz') : loc('tech_expedition'),
+                        loc('tech_subspace_sensors'), loc('tech_alien_database'), loc('tech_orichalcum_capacitor'), loc('tech_advanced_biotech'), loc('tech_codex_infinium'),
+                        loc('tech_spirit_box'), loc('tech_spirit_researcher'), loc('tech_dimensional_tap'), loc('wiki_mechanics_tech_levels_science')],
+                3: [global.race.universe === 'magic' ? loc('tech_sages') : loc('tech_mad_science'), loc('tech_electricity'), loc('tech_industrialization'),
+                        loc('tech_electronics'), loc('tech_fission'), loc('tech_arpa'), loc('tech_rocketry'), loc('tech_robotics'), loc('tech_lasers'), loc('tech_artificial_intelligence'),
+                        loc('tech_quantum_computing'), loc('tech_virtual_reality'), loc('tech_plasma'), loc('tech_shields'), loc('tech_ai_core'), loc('tech_metaphysics'),
+                        loc('tech_orichalcum_analysis'), loc('tech_cybernetics'), loc('tech_divinity'), loc('wiki_mechanics_tech_levels_high_tech')],
+            }
+        });
+        sideMenu('add',`mechanics-gameplay`,`tech_levels`,loc('wiki_mechanics_tech_levels'));
     }
 
     { // Religion
@@ -664,7 +712,7 @@ export function mechanicsPage(content){
                 2: ['1%',loc(`harmonic`)],
                 3: ['3%'],
                 4: [loc(`harmonic`),'2%','6%'],
-                5: [loc(`wiki_hell_pillar_para5d1`),12]
+                5: [loc(`wiki_hell_pillar_para5d1`),4,2]
             },
             data_link: {
                 5: ['wiki.html#hell-structures-west_tower']
