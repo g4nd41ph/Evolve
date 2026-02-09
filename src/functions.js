@@ -1240,10 +1240,11 @@ export function calcQuantumLevel(load){
         }
         if (global.race['linked']){
             let factor = traits.linked.vars()[0] / 100 * global.resource[global.race.species].amount;
-            if (factor > traits.linked.vars()[1] / 100){
-                factor -= traits.linked.vars()[1] / 100;
-                factor = factor / (factor + 200 - traits.linked.vars()[1]);
-                factor += traits.linked.vars()[1] / 100;
+            let softCapFactor = traits.linked.vars()[1] / 100;
+            if (factor > softCapFactor){
+                factor -= softCapFactor;
+                factor = factor * softCapFactor / (2 * (factor + softCapFactor));
+                factor += softCapFactor;
             }
             qbits *= 1 + factor;
         }
