@@ -4170,19 +4170,19 @@ export const traits = {
             // [Quantum Bonus per Citizen, Softcap]
             switch (r || traitRank('linked') || 1){
                 case 0.1:
-                    return [0.02,40];
+                    return [0.02,22];
                 case 0.25:
-                    return [0.03,40];
+                    return [0.03,22];
                 case 0.5:
-                    return [0.05,40];
+                    return [0.06,22];
                 case 1:
-                    return [0.1,80];
+                    return [0.10,45];
                 case 2:
-                    return [0.12,100];
+                    return [0.12,55];
                 case 3:
-                    return [0.14,100];
+                    return [0.14,55];
                 case 4:
-                    return [0.15,100];
+                    return [0.16,55];
             }
         }
     },

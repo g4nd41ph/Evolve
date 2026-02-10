@@ -1243,7 +1243,7 @@ export function calcQuantumLevel(load){
             let softCapFactor = traits.linked.vars()[1] / 100;
             if (factor > softCapFactor){
                 factor -= softCapFactor;
-                factor = factor * softCapFactor / (2 * (factor + softCapFactor));
+                factor = factor * softCapFactor / (factor + softCapFactor);
                 factor += softCapFactor;
             }
             qbits *= 1 + factor;
