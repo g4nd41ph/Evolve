@@ -27,10 +27,35 @@ export function hellPage(content){
     });
     sideMenu('add',`hell-gameplay`,'strategy',loc('wiki_hell_strategy'));
 
-    let soul = infoBoxBuilder(mainContent,{ name: 'soul_gem', template: 'hell', paragraphs: 4,
+    let soul = infoBoxBuilder(mainContent,{ name: 'soul_gem', template: 'hell', break: [2, 4, 5, 10, 15, 19, 24], paragraphs: 27,
         para_data: {
-            1: [loc('wiki_hell_soul_gem'),loc('tab_portal')],
-            3: [loc('tech_demon_attractor')]
+            1: [loc('wiki_hell_soul_gem'),loc('tab_portal'), loc('portal_soul_forge_title')],
+            2: [loc('resource_Soul_Gem_name')],
+            3: [loc('wiki_hell_soul_gem')],
+            4: [loc('resource_Soul_Gem_name'), '35', '1', '3', loc('tech_demon_attractor'), '5'],
+            5: [loc('resource_Soul_Gem_name'), '1', '10000'],
+            6: [loc('achieve_technophobe_name'), '10'],
+            7: [loc('trait_ghostly_name')],
+            8: [loc('tech_demon_attractor'), '5.2'],
+            9: ['12'],
+            10: [loc('wiki_hell_soul_gem')],
+            11: ['10000'],
+            12: [loc('tech_demon_attractor'), '22'],
+            13: [loc('trait_chicken_name')],
+            14: [loc('tech_dist_evil'), '10'],
+            15: [loc('wiki_hell_soul_gem'), loc('portal_war_drone_title')],
+            16: [loc('portal_war_drone_title'), '25-75', '50-125', loc('tech_advanced_predators')],
+            17: ['50', '100'],
+            18: [loc('portal_war_drone_title'), loc('resource_Soul_Gem_name')],
+            19: [loc('portal_gun_emplacement_title'), loc('portal_soul_forge_title'), loc('wiki_hell_soul_gem')],
+            20: [loc('portal_gun_emplacement_title')],
+            21: ['1', '7500'],
+            22: [loc('achieve_technophobe_name'), '10'],
+            23: [loc('tech_demon_attractor'), '6'],
+            24: [loc('tech_gate_turret'), loc('wiki_hell_soul_gem')],
+            25: [loc('tech_gate_turret')],
+            26: ['1', '3000'],
+            27: [loc('achieve_technophobe_name'), '10'],
         }
     });
     let soul_extra = $(`<div></div>`);

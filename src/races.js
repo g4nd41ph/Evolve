@@ -390,7 +390,7 @@ export const traits = {
         name: loc('trait_instinct_name'),
         desc: loc('trait_instinct'),
         desc_extra: function(vals) {
-            return [loc(`wiki_trait_effect_instinct_ex1`,[6.67,warningText('galaxy_chthonian'),10])];
+            return [loc(`wiki_trait_effect_instinct_ex1`,[warningTextNoLoc(6.67),warningText('galaxy_chthonian'),warningTextNoLoc(10)])];
         },
         type: 'genus',
         genus: 'herbivore',
@@ -1896,7 +1896,7 @@ export const traits = {
         desc_extra: function(vals) {
             return [
                 loc(`wiki_trait_effect_hooved_ex1`,[hoovedRename(false, vals[1])]),
-                loc(`wiki_trait_effect_hooved_ex2`,[rName('Lumber'), rName('Copper'), rName('Iron'), rName('Steel'), rName('Adamantite'), rName('Orichalcum'), 12,75,150,500,5000]),
+                loc(`wiki_trait_effect_hooved_ex2`,[rName('Lumber'), rName('Copper'), rName('Iron'), rName('Steel'), rName('Adamantite'), rName('Orichalcum'), warningTextNoLoc(12),warningTextNoLoc(75),warningTextNoLoc(150),warningTextNoLoc(500),warningTextNoLoc(5000)]),
                 loc(`wiki_trait_effect_hooved_ex3`),
                 loc(`wiki_trait_effect_hooved_ex4`,[warningTextNoLoc(5),hoovedRename(false, vals[1])]),
                 loc(`wiki_trait_effect_hooved_ex5`,[rName('Lumber'), rName('Copper')])];
@@ -2226,6 +2226,7 @@ export const traits = {
         desc: loc('trait_tough'),
         desc_function: function(vals) {
             vals[1] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
+            vals[2] = loc('job_quarry_worker');
             return vals;
         },
         type: 'major',
@@ -3285,7 +3286,8 @@ export const traits = {
             loc(`wiki_trait_effect_hivemind_ex4`),
             loc(`wiki_trait_effect_hivemind_ex5`, [warningText('trait_high_pop_name'), warningTextNoLoc(1.5), warningTextNoLoc(2)]),
             loc(`wiki_trait_effect_hivemind_ex6`, [warningText('trait_strong_name'), warningText('trait_living_tool_name'), warningText('trait_swift_name'), warningText('governor_educator'), warningText('trait_hivemind_name'), linkText('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types'), warningText('job_professor')]),
-            loc(`wiki_trait_effect_hivemind_ex7`)];
+            loc(`wiki_trait_effect_hivemind_ex7`, [warningText('evo_challenge_lone_survivor')]),
+            loc(`wiki_trait_effect_hivemind_ex8`)];
         },
         type: 'major',
         origin: 'antid',
@@ -3968,6 +3970,7 @@ export const traits = {
         desc: loc('trait_terrifying'),
         desc_function: function(vals) {
             vals[2] = loc('tech_corruption');
+            vals[3] = linkTextNoColor('wiki_combat_loot', ['wiki.html#combat-gameplay-loot']);
             return vals;
         },
         type: 'major',
@@ -4301,7 +4304,7 @@ export const traits = {
                 loc(`wiki_trait_effect_imitation_ex2`, [warningText('genelab_genus_synthetic')]),
                 loc(`wiki_trait_effect_imitation_ex3`, [warningText('wiki_resets_ai')]),
                 loc(`wiki_trait_effect_imitation_ex4`, [warningText('trait_empowered_name')]),
-                loc(`wiki_trait_effect_imitation_ex5`, [warningText('tech_dist_arpa')])];
+                loc(`wiki_trait_effect_imitation_ex5`, [linkText('wiki_mechanics_crispr_mutation', 'wiki.html#mechanics-gameplay-crispr_mutation')])];
         },
         type: 'major',
         origin: 'synth',
@@ -4392,7 +4395,7 @@ export const traits = {
         desc_extra: function(vals) {
             return [
                 loc(`wiki_trait_effect_shapeshifter_ex1`, [warningText('trait_empowered_name')]),
-                loc(`wiki_trait_effect_shapeshifter_ex2`, [warningText('tech_dist_arpa')])];
+                loc(`wiki_trait_effect_shapeshifter_ex2`, [linkText('wiki_mechanics_crispr_mutation', 'wiki.html#mechanics-gameplay-crispr_mutation')])];
         },
         type: 'major',
         origin: 'nano',
@@ -4598,6 +4601,9 @@ export const traits = {
             vals[9] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
             vals[10] = linkTextNoColor('wiki_mechanics_tech_levels_science', 'wiki.html#mechanics-gameplay-tech_levels');
             return vals;
+        },
+        desc_extra: function(vals) {
+            return [loc(`wiki_trait_effect_living_tool_ex1`, [warningText('trait_strong_name'), linkText('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types')])];
         },
         type: 'major',
         origin: 'shoggoth',
@@ -4815,7 +4821,7 @@ export const traits = {
         name: loc('trait_unstable_name'),
         desc: loc('trait_unstable'),
         desc_extra: function(vals) {
-            return [loc(`wiki_trait_effect_unstable_ex1`, [warningText(vals[1])])];
+            return [loc(`wiki_trait_effect_unstable_ex1`, [warningTextNoLoc(vals[1])])];
         },
         type: 'major',
         origin: 'lichen',
@@ -4867,7 +4873,7 @@ export const traits = {
                 loc(`wiki_trait_effect_elemental_ex1`),
                 loc(`wiki_trait_effect_elemental_ex2`, [warningText('biome_savanna_name'), warningText('biome_forest_name'), warningText('biome_swamp_name'), loc('wiki_trait_effect_elemental_acid', [warningText('element_acid'), warningTextNoLoc(vals[2]), warningTextNoLoc(vals[5])])]),
                 loc(`wiki_trait_effect_elemental_ex3`, [warningText('biome_grassland_name'), warningText('biome_desert_name'), warningText('biome_eden_name'), loc('wiki_trait_effect_elemental_electric', [warningText('element_electric'), warningTextNoLoc(vals[1]), warningTextNoLoc(vals[5])])]),
-                loc(`wiki_trait_effect_elemental_ex4`, [warningText(1.28)]),
+                loc(`wiki_trait_effect_elemental_ex4`, [warningTextNoLoc(1.28)]),
                 loc(`wiki_trait_effect_elemental_ex5`, [warningText('biome_oceanic_name'), warningText('biome_tundra_name'), warningText('biome_taiga_name'), loc('wiki_trait_effect_elemental_frost', [warningText('element_frost'), warningTextNoLoc(vals[4]), warningTextNoLoc(vals[5]), warningText('city_biolab')])]),
                 loc(`wiki_trait_effect_elemental_ex6`, [warningText('biome_volcanic_name'), warningText('biome_ashland_name'), warningText('biome_hellscape_name'), loc('wiki_trait_effect_elemental_fire', [warningText('element_fire'), warningTextNoLoc(vals[3]), warningTextNoLoc(vals[5])])])]
         },
@@ -4966,9 +4972,9 @@ export const traits = {
         },
         desc_extra: function(vals) {
             return [
-                loc(`wiki_trait_effect_tusk_ex1`, [warningText('biome_oceanic_name'), warningText('biome_swamp_name'), warningText('biome_eden_name'), warningText('biome_forest_name'),
-                warningText('biome_grassland_name'), warningText('biome_savanna_name'), warningText('biome_tundra_name'), warningText('biome_taiga_name'), warningText('biome_desert_name'),
-                warningText('biome_volcanic_name'), warningText('biome_ashland_name'), warningText('biome_hellscape_name'), warningText('rain'), warningText('thunderstorm')])];
+                loc(`wiki_trait_effect_tusk_ex1`, [warningText('biome_oceanic_name'), warningText('biome_swamp_name'), warningTextNoLoc(30), warningText('biome_eden_name'), warningText('biome_forest_name'),
+                warningText('biome_grassland_name'), warningText('biome_savanna_name'), warningTextNoLoc(20), warningText('biome_tundra_name'), warningText('biome_taiga_name'), warningTextNoLoc(10), warningText('biome_desert_name'),
+                warningText('biome_volcanic_name'), warningText('biome_ashland_name'), warningText('biome_hellscape_name'), warningTextNoLoc(0), warningText('rain'), warningText('thunderstorm'), warningTextNoLoc(10)])];
         },
         type: 'major',
         origin: 'narwhal',
@@ -5245,7 +5251,7 @@ export const traits = {
         name: loc('trait_empowered_name'),
         desc: loc('trait_empowered'),
         desc_extra: function (vals) {
-            return [ loc(`wiki_trait_effect_empowered_ex1`, [warningText('tech_fanaticism'), warningText('tech_deify'), warningText('arpa_mutate'), warningText('trait_shapeshifter_name'),
+            return [ loc(`wiki_trait_effect_empowered_ex1`, [warningText('tech_fanaticism'), warningText('tech_deify'), linkText('wiki_mechanics_crispr_mutation', 'wiki.html#mechanics-gameplay-crispr_mutation'), warningText('trait_shapeshifter_name'),
                 warningText('trait_imitation_name')]), loc(`wiki_trait_effect_empowered_ex2`)];
         },
         type: 'major',

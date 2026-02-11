@@ -490,20 +490,42 @@ export function mechanicsPage(content){
     }
 
     { // CRISPR Mutation
-        let crispr_mutation = infoBoxBuilder(mainContent,{ name: 'crispr_mutation', template: 'mechanics', label: loc('wiki_mechanics_crispr_mutation'), paragraphs: 5, break: [3], h_level: 2,
+        let crispr_mutation = infoBoxBuilder(mainContent,{ name: 'crispr_mutation', template: 'mechanics', label: loc('wiki_mechanics_crispr_mutation'), paragraphs: 13, break: [3, 4, 5, 6, 7, 8, 9, 10], h_level: 2,
             para_data: {
                 1: [loc('tab_arpa_crispr'),loc('arpa_genepool_mutation_title'),loc('resource_Plasmid_plural_name')],
                 3: [loc('tech_arpa'),loc('tab_arpa_genetics'),],
                 4: ['5x',loc('wiki_mechanics_crispr_mutation_para4_note1')],
-                5: [loc('wiki_mechanics_custom'),loc('race_sludge'),'10x']
+                5: [loc('wiki_mechanics_custom'),loc('race_sludge'),'10x', loc('wiki_mechanics_custom_hybrid'), loc('race_ultra_sludge')],
+                6: ['1', '2x', '0.5', '3x', '0.25', '4x', '0.1'],
+                7: ['10'],
+                8: ['10'],
+                9: ['10'],
+                11: [loc('wiki_mechanics_crispr_mutation')],
+                12: [loc('wiki_mechanics_crispr_mutation')],
+                13: [loc('trait_shapeshifter_name'), loc('trait_imitation_name'), loc('wiki_mechanics_crispr_mutation')]
             },
             data_link: {
                 1: [false,'wiki.html#crispr-prestige-mutation','wiki.html#resources-prestige-plasmids'],
                 4: [false,'wiki.html#traits-species'],
-                5: ['wiki.html#custom-species','wiki.html#races-species-sludge']
+                5: ['wiki.html#custom-species','wiki.html#races-species-sludge', false, false, 'wiki.html#races-species-sludge'],
+                13: ['#traits-species-major_shapeshifter', '#traits-species-major_imitation', false]
             }
         });
         sideMenu('add',`mechanics-gameplay`,`crispr_mutation`,loc('wiki_mechanics_crispr_mutation'));
+    }
+
+    { // Traits from Multiple Sources
+        let trait_sources = infoBoxBuilder(mainContent,{ name: 'trait_sources', template: 'mechanics', label: loc('wiki_mechanics_trait_sources'), paragraphs: 3, h_level: 2,
+            para_data: {
+                2: [loc('tech_fanaticism'), loc('tech_deify'), loc('trait_imitation_name'), '4'],
+                3: ['5', loc('evo_challenge_warlord')]
+            },
+            data_link: {
+                2: ['wiki.html#civilized-tech-alt_fanaticism', 'wiki.html#early_space-tech-deify_alt', '#traits-species-major_imitation', false],
+                3: [false, 'wiki.html#challenges-gameplay-scenarios_warlord']
+            }
+        });
+        sideMenu('add',`mechanics-gameplay`,`trait_sources`,loc('wiki_mechanics_trait_sources'));
     }
 
     { // Planets 
