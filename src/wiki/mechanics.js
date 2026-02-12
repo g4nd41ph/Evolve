@@ -96,6 +96,21 @@ export function mechanicsPage(content){
         sideMenu('add',`mechanics-gameplay`,`job_stress`,loc('wiki_mechanics_job_stress'));
     }
 
+    { // Starvation
+        infoBoxBuilder(mainContent,{ name: 'starvation', template: 'mechanics', label: loc('wiki_mechanics_starvation'), paragraphs: 7, break: [3,6], h_level: 2,
+            para_data: {
+                2: [loc('wiki_mechanics_starvation'), loc('wiki_mechanics_starvation_threshold'), loc('wiki_mechanics_starvation_penalty')],
+                3: [loc('wiki_mechanics_starvation_threshold'), '1.25', loc('wiki_mechanics_starvation')],
+                4: ['1', loc('wiki_mechanics_starvation_threshold'), loc('wiki_mechanics_starvation')],
+                5: ['1', '10', '0.25'],
+                6: [loc('wiki_mechanics_starvation_penalty'), '50'],
+                7: [loc('wiki_mechanics_starvation_penalty')],
+                8: [loc('wiki_mechanics_starvation_penalty')]
+            }
+        });
+        sideMenu('add',`mechanics-gameplay`,`starvation`,loc('wiki_mechanics_starvation'));
+    }
+
     { //Population Growth
         infoBoxBuilder(mainContent,{ name: 'pop_growth', template: 'mechanics', label: loc('wiki_mechanics_pop_growth'), paragraphs: 8, break: [2,3,5,6,8], h_level: 2,
             para_data: {
@@ -351,9 +366,8 @@ export function mechanicsPage(content){
     }
 
     { //Tech Levels
-        infoBoxBuilder(mainContent,{ name: 'tech_levels', template: 'mechanics', label: loc('wiki_mechanics_tech_levels'), paragraphs: 3, break: [2,3], h_level: 2,
+        infoBoxBuilder(mainContent,{ name: 'tech_levels', template: 'mechanics', label: loc('wiki_mechanics_tech_levels'), paragraphs: 5, break: [2,3,4,5], h_level: 2,
             para_data: {
-                1: [loc('wiki_tech_tree_science'), loc('wiki_tech_tree_high_tech'), loc('wiki_mechanics_tech_levels_science'), loc('wiki_mechanics_tech_levels_high_tech')],
                 2: [loc('tech_science'), loc('tech_library'), loc('tech_thesis'), loc('tech_research_grant'),
                         global.race.universe === 'magic' ? loc('tech_magic_tomes') : loc('tech_scientific_journal'), loc('tech_adjunct_professor'), loc('tech_tesla_coil'),
                         loc('tech_internet'), loc('tech_observatory'), loc('tech_world_collider'), global.race.universe === 'magic' ? loc('tech_sanctum') : loc('tech_laboratory'),
@@ -364,6 +378,8 @@ export function mechanicsPage(content){
                         loc('tech_electronics'), loc('tech_fission'), loc('tech_arpa'), loc('tech_rocketry'), loc('tech_robotics'), loc('tech_lasers'), loc('tech_artificial_intelligence'),
                         loc('tech_quantum_computing'), loc('tech_virtual_reality'), loc('tech_plasma'), loc('tech_shields'), loc('tech_ai_core'), loc('tech_metaphysics'),
                         loc('tech_orichalcum_analysis'), loc('tech_cybernetics'), loc('tech_divinity'), loc('wiki_mechanics_tech_levels_high_tech')],
+                4: [loc('tech_hospital'), global.race['artifical'] ? loc('tech_repair_subroutines') : loc('tech_bac_tanks'), loc('tech_medkit'), loc('wiki_mechanics_tech_levels_medical')],
+                5: [loc('tech_armor'), loc('tech_plate_armor'), loc('tech_kevlar'), loc('tech_nanoweave_vest'), loc('wiki_mechanics_tech_levels_armor')]
             }
         });
         sideMenu('add',`mechanics-gameplay`,`tech_levels`,loc('wiki_mechanics_tech_levels'));
@@ -552,16 +568,6 @@ export function mechanicsPage(content){
             }
         },planets);
         sideMenu('add',`mechanics-gameplay`,`planet`,loc('wiki_menu_planets'));
-    }
-    
-    { // Soul Gem
-        infoBoxBuilder(mainContent,{ name: 'soul_gem', template: 'hell', label: loc('wiki_hell_soul_gem'), paragraphs: 4, h_level: 2,
-            para_data: {
-                1: [loc('wiki_hell_soul_gem'),loc('tab_portal')],
-                3: [loc('tech_demon_attractor')]
-            }
-        });
-        sideMenu('add',`mechanics-gameplay`,`soul_gem`,loc('wiki_hell_soul_gem'));
     }
 
     { // Quantum Level

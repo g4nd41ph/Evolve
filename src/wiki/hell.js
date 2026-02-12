@@ -19,10 +19,19 @@ export function hellPage(content){
         data_color: { 3: ['caution'] } });
     sideMenu('add',`hell-gameplay`,'siege',loc('wiki_hell_siege'));
 
-    infoBoxBuilder(mainContent,{ name: 'strategy', template: 'hell', paragraphs: 5, break: [4],
+    infoBoxBuilder(mainContent,{ name: 'strategy', template: 'hell', paragraphs: 12, break: [4, 6, 12],
         para_data: {
             4: [loc('resource_Soul_Gem_name')],
-            5: [[`1`], [`30`], [`10`], [`15`], [`25`], loc('wiki_hell_strategy_ambush_odds')]
+            5: [[`1`], [`30`], [`10`], [`15`], [`25`], loc('wiki_hell_strategy_ambush_odds')],
+            6: [loc('wiki_combat_rating')],
+            7: [loc('wiki_hell_strategy_patrol_armor')],
+            8: [loc('wiki_hell_strategy_patrol_armor')],
+            11: [loc('trait_instinct_name')],
+            12: [loc('wiki_hell_strategy_patrol_armor'), loc('wiki_mechanics_tech_levels_armor'), loc('trait_armored_name'), loc('trait_scales_name')]
+        },
+        data_link: {
+            6: ['wiki.html#combat-gameplay-rating'],
+            12: [false, 'wiki.html#mechanics-gameplay-tech_levels', false, false]
         }
     });
     sideMenu('add',`hell-gameplay`,'strategy',loc('wiki_hell_strategy'));

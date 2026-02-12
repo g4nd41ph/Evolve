@@ -3181,6 +3181,12 @@ export function rName(r){
     return `<span class="has-text-warning">${res}</span>`;
 }
 
+export function rNameNoColor(r){
+    let res = global.hasOwnProperty('resource') && global.resource.hasOwnProperty(r) ? global.resource[r].name : loc(`resource_${r}_name`);
+    return `<span style="color: inherit;">${res}</span>`;
+}
+
+
 export function convertDivisor (input) {
     //The input value is a percentage used to multiply a divisor, use X/(1+X) to indicate a percentage change in descriptions.
     return +(100 * input / (100 + input)).toFixed(2);

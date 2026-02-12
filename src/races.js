@@ -2,7 +2,7 @@ import { global, seededRandom, save, webWorker, power_generated, keyMultiplier, 
 import { loc } from './locale.js';
 import { defineIndustry } from './industry.js';
 import { setJobName, jobScale, loadFoundry } from './jobs.js';
-import { vBind, clearElement, popover, removeFromQueue, removeFromRQueue, calc_mastery, gameLoop, getEaster, getHalloween, randomKey, modRes, messageQueue, linkText, linkTextNoColor, warningText, warningTextNoLoc, rName, convertDivisor, hoovedRename } from './functions.js';
+import { vBind, clearElement, popover, removeFromQueue, removeFromRQueue, calc_mastery, gameLoop, getEaster, getHalloween, randomKey, modRes, messageQueue, linkText, linkTextNoColor, warningText, warningTextNoLoc, rName, convertDivisor, hoovedRename, rNameNoColor } from './functions.js';
 import { setResourceName, drawResourceTab, atomic_mass } from './resources.js';
 import { buildGarrison, govEffect, govTitle, armyRating, govCivics } from './civics.js';
 import { govActive, removeTask, defineGovernor } from './governor.js';
@@ -355,6 +355,10 @@ export const traits = {
     cautious: { // Rain reduces combat rating
         name: loc('trait_cautious_name'),
         desc: loc('trait_cautious'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'genus',
         origin: 'carnivore',
         taxonomy: 'combat',
@@ -389,6 +393,10 @@ export const traits = {
     instinct: { // Avoids Danger
         name: loc('trait_instinct_name'),
         desc: loc('trait_instinct'),
+        desc_function: function(vals) {
+            vals[0] = -convertDivisor(-vals[0]);
+            return vals;
+        },
         desc_extra: function(vals) {
             return [loc(`wiki_trait_effect_instinct_ex1`,[warningTextNoLoc(6.67),warningText('galaxy_chthonian'),warningTextNoLoc(10)])];
         },
@@ -420,7 +428,21 @@ export const traits = {
         name: loc('trait_forager_name'),
         desc: loc('trait_forager'),
         desc_function: function(vals) {
-            vals[1] = linkTextNoColor('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types');
+            vals[1] = loc('trait_forager_name');
+            vals[2] = '14';
+            vals[3] = rNameNoColor('Food');
+            vals[4] = '10';
+            vals[5] = rNameNoColor('Lumber');
+            vals[6] = '8.8';
+            vals[7] = rNameNoColor('Stone');
+            vals[8] = rNameNoColor('Chrysotile');
+            vals[9] = rNameNoColor('Aluminium');
+            vals[10] = '2';
+            vals[11] = rNameNoColor('Furs');
+            vals[12] = '1.4';
+            vals[13] = rNameNoColor('Iron');
+            vals[14] = '1';
+            vals[15] = rNameNoColor('Copper');
             return vals;
         },
         type: 'genus',
@@ -604,6 +626,10 @@ export const traits = {
     scales: { // Minor decrease of soldiers killed in combat
         name: loc('trait_scales_name'),
         desc: loc('trait_scales'),
+        desc_function: function(vals) {
+            vals[3] = linkTextNoColor('wiki_hell_strategy_patrol_armor', 'wiki.html#hell-gameplay-strategy');
+            return vals;
+        },
         type: 'genus',
         origin: 'reptilian',
         taxonomy: 'combat',
@@ -690,6 +716,7 @@ export const traits = {
         desc_function: function(vals) {
             vals[1] = loc('job_quarry_worker');
             vals[2] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
+            vals[3] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
             return vals;
         },
         type: 'genus',
@@ -747,10 +774,11 @@ export const traits = {
         desc_function: function(vals) {
             vals[3] = linkTextNoColor('wiki_mechanics_pop_growth_lower_bound', 'wiki.html#mechanics-gameplay-pop_growth');
             vals[4] = linkTextNoColor('wiki_mechanics_pop_growth_upper_bound', 'wiki.html#mechanics-gameplay-pop_growth');
+            vals[5] = linkTextNoColor('wiki_combat_healing_potential', 'wiki.html#combat-gameplay-healing');
             return vals;
         },
         desc_extra: function(vals) {
-            return [loc(`wiki_trait_effect_high_pop_ex1`)];
+            return [loc(`wiki_trait_effect_high_pop_ex1`, [warningText('trait_shapeshifter_name'), warningText('trait_imitation_name'), warningText('genelab_genus_insectoid')])];
         },
         type: 'genus',
         origin: 'insectoid',
@@ -1300,6 +1328,10 @@ export const traits = {
     holy: { // Combat Bonus in Hell
         name: loc('trait_holy_name'),
         desc: loc('trait_holy'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'genus',
         origin: 'angelic',
         taxonomy: 'combat',
@@ -1642,6 +1674,10 @@ export const traits = {
     angry: { // When hungry you get hangry, low food penalty is more severe
         name: loc('trait_angry_name'),
         desc: loc('trait_angry'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_starvation_penalty', 'wiki.html#mechanics-gameplay-starvation');
+            return vals;
+        },
         type: 'major',
         origin: 'orc',
         taxonomy: 'production',
@@ -1784,6 +1820,7 @@ export const traits = {
         name: loc('trait_playful_name'),
         desc: loc('trait_playful'),
         desc_function: function (vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
             if (global.race['warlord']) vals = [vals[0] * 100, global.resource.Furs.name];
             return vals;
         },
@@ -1815,6 +1852,7 @@ export const traits = {
         desc: loc('trait_freespirit'),
         desc_function: function (vals) {
             vals[1] = linkTextNoColor('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types');
+            vals[2] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
             return vals;
         },
         type: 'major',
@@ -1843,6 +1881,10 @@ export const traits = {
     beast_of_burden: { // Gains more loot during raids
         name: loc('trait_beast_of_burden_name'),
         desc: loc('trait_beast_of_burden'),
+        desc_function: function(vals) {
+            vals[0] = linkTextNoColor('wiki_combat_loot', 'wiki.html#combat-gameplay-loot');
+            return vals;
+        },
         type: 'major',
         origin: 'centaur',
         taxonomy: 'combat',
@@ -1928,6 +1970,10 @@ export const traits = {
     rage: { // Wounded soldiers rage with extra power
         name: loc('trait_rage_name'),
         desc: loc('trait_rage'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'rhinotaur',
         taxonomy: 'combat',
@@ -1955,8 +2001,11 @@ export const traits = {
     heavy: { // Some costs increased
         name: loc('trait_heavy_name'),
         desc: loc('trait_heavy'),
-        desc_extra: function(vals) {
-            return [loc(`wiki_trait_effect_heavy_ex1`,[rName('Stone'),rName('Cement'),rName('Wrought_Iron')])];
+        desc_function: function(vals) {
+            vals[2] = rNameNoColor('Stone')
+            vals[3] = rNameNoColor('Cement')
+            vals[4] = rNameNoColor('Wrought_Iron')
+            return vals;
         },
         type: 'major',
         origin: 'rhinotaur',
@@ -1985,6 +2034,11 @@ export const traits = {
     gnawer: { // Population destroys lumber by chewing on it
         name: loc('trait_gnawer_name'),
         desc: loc('trait_gnawer'),
+        desc_function: function(vals) {
+            vals[1] = rNameNoColor('Lumber');
+            vals[2] = rNameNoColor('Stone');
+            return vals;
+        },
         type: 'major',
         origin: 'capybara',
         taxonomy: 'resource',
@@ -2146,6 +2200,9 @@ export const traits = {
     smart: { // Knowledge costs reduced by 10%
         name: loc('trait_smart_name'),
         desc: loc('trait_smart'),
+        desc_extra: function(vals) {
+            return [loc('wiki_trait_effect_smart_ex1', [warningText('trait_dumb_name'), warningTextNoLoc('5')])];
+        },
         type: 'major',
         origin: 'gnome',
         taxonomy: 'utility',
@@ -2172,6 +2229,11 @@ export const traits = {
     puny: { // Lowers minium bound for army score roll
         name: loc('trait_puny_name'),
         desc: loc('trait_puny'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            vals[2] = linkTextNoColor('wiki_combat_roll', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'gnome',
         taxonomy: 'combat',
@@ -2198,6 +2260,9 @@ export const traits = {
     dumb: { // Knowledge costs increased by 5%
         name: loc('trait_dumb_name'),
         desc: loc('trait_dumb'),
+        desc_extra: function(vals) {
+            return [loc('wiki_trait_effect_dumb_ex1', [warningText('trait_smart_name'), warningTextNoLoc('5')])];
+        },
         type: 'major',
         origin: 'ogre',
         taxonomy: 'utility',
@@ -2308,6 +2373,10 @@ export const traits = {
     regenerative: { // Wounded soldiers heal 4x as fast
         name: loc('trait_regenerative_name'),
         desc: loc('trait_regenerative'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_healing_base', 'wiki.html#combat-gameplay-healing');
+            return vals;
+        },
         type: 'major',
         origin: 'troll',
         taxonomy: 'combat',
@@ -2386,6 +2455,10 @@ export const traits = {
     armored: { // Less soldiers die in combat
         name: loc('trait_armored_name'),
         desc: loc('trait_armored'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_hell_strategy_patrol_armor', 'wiki.html#hell-gameplay-strategy');
+            return vals;
+        },
         type: 'major',
         origin: 'tortoisan',
         taxonomy: 'combat',
@@ -2413,6 +2486,10 @@ export const traits = {
     optimistic: { // Minor reduction to stress
         name: loc('trait_optimistic_name'),
         desc: loc('trait_optimistic'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
+            return vals;
+        },
         type: 'major',
         origin: 'gecko',
         taxonomy: 'production',
@@ -2443,6 +2520,7 @@ export const traits = {
             vals[2] = loc('trait_chameleon_name');
             vals[3] = loc('trait_elusive_name');
             vals[4] = linkTextNoColor('wiki_hell_strategy_ambush_odds', 'wiki.html#hell-gameplay-strategy');
+            vals[5] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
             return vals;
         },
         desc_extra: function(vals) {
@@ -2475,6 +2553,10 @@ export const traits = {
     slow_digestion: { // Your race is more resilient to starvation
         name: loc('trait_slow_digestion_name'),
         desc: loc('trait_slow_digestion'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_starvation_threshold', 'wiki.html#mechanics-gameplay-starvation');
+            return vals;
+        },
         type: 'major',
         origin: 'slitheryn',
         taxonomy: 'production',
@@ -2637,6 +2719,10 @@ export const traits = {
     pessimistic: { // Minor increase to stress
         name: loc('trait_pessimistic_name'),
         desc: loc('trait_pessimistic'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
+            return vals;
+        },
         type: 'major',
         origin: 'pterodacti',
         taxonomy: 'production',
@@ -2747,6 +2833,10 @@ export const traits = {
     iron_wood: { // Removes Plywood as a resource, adds attack bonus
         name: loc('trait_iron_wood_name'),
         desc: loc('trait_iron_wood'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'entish',
         taxonomy: 'resource',
@@ -2907,6 +2997,10 @@ export const traits = {
     sticky: { // Food req lowered, Increase Combat Rating
         name: loc('trait_sticky_name'),
         desc: loc('trait_sticky'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'pinguicula',
         taxonomy: 'combat',
@@ -2991,6 +3085,10 @@ export const traits = {
     parasite: { // You can only reproduce by infecting victims, spores sometimes find a victim when it's windy
         name: loc('trait_parasite_name'),
         desc: loc('trait_parasite'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'sporgar',
         taxonomy: 'combat',
@@ -3137,6 +3235,8 @@ export const traits = {
         desc_function: function(vals) {
             vals[1] = loc('job_lumberjack');
             vals[2] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
+            vals[3] = linkTextNoColor('wiki_combat_healing_potential', 'wiki.html#combat-gameplay-healing');
+            vals[4] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
             return vals;
         },
         desc_extra: function(vals) {
@@ -3195,6 +3295,10 @@ export const traits = {
     malnutrition: { // The rationing penalty is weaker
         name: loc('trait_malnutrition_name'),
         desc: loc('trait_malnutrition'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_starvation_penalty', 'wiki.html#mechanics-gameplay-starvation');
+            return vals;
+        },
         type: 'major',
         origin: 'mantis',
         taxonomy: 'production',
@@ -3221,6 +3325,11 @@ export const traits = {
     claws: { // Raises maximum bound for army score roll
         name: loc('trait_claws_name'),
         desc: loc('trait_claws'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            vals[2] = linkTextNoColor('wiki_combat_roll', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'scorpid',
         taxonomy: 'combat',
@@ -3247,6 +3356,10 @@ export const traits = {
     atrophy: { // More prone to starvation
         name: loc('trait_atrophy_name'),
         desc: loc('trait_atrophy'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_mechanics_starvation_threshold', 'wiki.html#mechanics-gameplay-starvation');
+            return vals;
+        },
         type: 'major',
         origin: 'scorpid',
         taxonomy: 'production',
@@ -3273,21 +3386,18 @@ export const traits = {
     hivemind: { // Jobs with low citizen counts assigned to them have reduced output, but those with high numbers have increased output.
         name: loc('trait_hivemind_name'),
         desc: loc('trait_hivemind'),
-        desc_function: function (vals) {
-            if (global.race['high_pop']) vals[0] *= traits.high_pop.vars()[0];
-            return vals;
-        },
         desc_extra: function(vals) {
             return [
             loc(`wiki_trait_effect_hivemind_ex1`, [warningText('civics_garrison_soldiers'), warningText('job_lumberjack'), warningText('job_hunter'), warningText('job_raider'), 
                  linkText('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types'), warningText('job_professor'), warningText('job_scientist')]),
-            loc(`wiki_trait_effect_hivemind_ex2`, [warningText('trait_high_pop_name'), warningTextNoLoc(100)]),
-            loc(`wiki_trait_effect_hivemind_ex3`, [warningText('civics_garrison_soldiers'), warningTextNoLoc(1), warningText('trait_hivemind_name'), warningText('tech_combat_droids'), warningTextNoLoc(1), warningText('tech_enhanced_droids'), warningTextNoLoc(2)]),
-            loc(`wiki_trait_effect_hivemind_ex4`),
-            loc(`wiki_trait_effect_hivemind_ex5`, [warningText('trait_high_pop_name'), warningTextNoLoc(1.5), warningTextNoLoc(2)]),
-            loc(`wiki_trait_effect_hivemind_ex6`, [warningText('trait_strong_name'), warningText('trait_living_tool_name'), warningText('trait_swift_name'), warningText('governor_educator'), warningText('trait_hivemind_name'), linkText('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types'), warningText('job_professor')]),
-            loc(`wiki_trait_effect_hivemind_ex7`, [warningText('evo_challenge_lone_survivor')]),
-            loc(`wiki_trait_effect_hivemind_ex8`)];
+            loc(`wiki_trait_effect_hivemind_ex2`, [warningText('trait_high_pop_name'), warningText('civics_garrison_soldiers')]),
+            loc(`wiki_trait_effect_hivemind_ex3`, [warningText('trait_high_pop_name'), warningTextNoLoc(100)]),
+            loc(`wiki_trait_effect_hivemind_ex4`, [warningText('civics_garrison_soldiers'), warningTextNoLoc(1), warningText('trait_hivemind_name'), warningText('tech_combat_droids'), warningTextNoLoc(1), warningText('tech_enhanced_droids'), warningTextNoLoc(2)]),
+            loc(`wiki_trait_effect_hivemind_ex5`),
+            loc(`wiki_trait_effect_hivemind_ex6`, [warningText('trait_high_pop_name'), warningTextNoLoc(1.5), warningTextNoLoc(2)]),
+            loc(`wiki_trait_effect_hivemind_ex7`, [warningText('trait_strong_name'), warningText('trait_living_tool_name'), warningText('trait_swift_name'), warningText('governor_educator'), warningText('trait_hivemind_name'), linkText('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types'), warningText('job_professor')]),
+            loc(`wiki_trait_effect_hivemind_ex8`, [warningText('evo_challenge_lone_survivor')]),
+            loc(`wiki_trait_effect_hivemind_ex9`)];
         },
         type: 'major',
         origin: 'antid',
@@ -3381,6 +3491,10 @@ export const traits = {
     apex_predator: { // Hunting and Combat ratings are significantly higher, but you can't use armor
         name: loc('trait_apex_predator_name'),
         desc: loc('trait_apex_predator'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'sharkin',
         taxonomy: 'combat',
@@ -3408,6 +3522,10 @@ export const traits = {
     invertebrate: { // You have no bones
         name: loc('trait_invertebrate_name'),
         desc: loc('trait_invertebrate'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_loot', 'wiki.html#combat-gameplay-loot');
+            return vals;
+        },
         type: 'major',
         origin: 'octigoran',
         taxonomy: 'combat',
@@ -3489,7 +3607,7 @@ export const traits = {
         desc_function: function(vals) {
             let coal = -(actions.city.coal_power.powered(true));
             let oil = -(actions.city.oil_power.powered(true));
-            vals = [coal + vals[0], oil + vals[0] - 1, oil + vals[0] + 1, coal, oil, vals[1]];
+            vals = [+(coal + vals[0]).toFixed(2), +(oil + vals[0] - 1).toFixed(2), +(oil + vals[0] + 1).toFixed(2), +(coal).toFixed(2), +(oil).toFixed(), +(vals[1]).toFixed(2)];
             return vals;
         },
         type: 'major',
@@ -3612,6 +3730,10 @@ export const traits = {
     slow_regen: { // Your soldiers wounds heal slower.
         name: loc('trait_slow_regen_name'),
         desc: loc('trait_slow_regen'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_healing_difficulty', 'wiki.html#combat-gameplay-healing');
+            return vals;
+        },
         type: 'major',
         origin: 'phoenix',
         taxonomy: 'combat',
@@ -3793,6 +3915,7 @@ export const traits = {
         desc: loc('trait_ghostly'),
         desc_function: function(vals) {
             vals[2] = -convertDivisor(-vals[2]);
+            vals[3] = linkTextNoColor('wiki_hell_soul_gem', 'wiki.html#hell-gameplay-soul_gem');
             if (global.race['warlord']) vals = [vals[0], +((vals[1] - 1) * 100).toFixed(0), global.resource.Soul_Gem.name];
             return vals;
         },
@@ -3877,6 +4000,7 @@ export const traits = {
         desc: loc('trait_humpback'),
         desc_function: function(vals) {
             vals[2] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
+            vals[3] = linkTextNoColor('wiki_mechanics_starvation_threshold', 'wiki.html#mechanics-gameplay-starvation');
             return vals;
         },
         type: 'major',
@@ -3941,6 +4065,10 @@ export const traits = {
     fiery: { // Major war bonus
         name: loc('trait_fiery_name'),
         desc: loc('trait_fiery'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'balorg',
         taxonomy: 'combat',
@@ -3970,7 +4098,8 @@ export const traits = {
         desc: loc('trait_terrifying'),
         desc_function: function(vals) {
             vals[2] = loc('tech_corruption');
-            vals[3] = linkTextNoColor('wiki_combat_loot', ['wiki.html#combat-gameplay-loot']);
+            vals[3] = linkTextNoColor('wiki_combat_loot', 'wiki.html#combat-gameplay-loot');
+            vals[4] = rNameNoColor('Titanium');
             return vals;
         },
         type: 'major',
@@ -4080,6 +4209,10 @@ export const traits = {
     pathetic: { // You suck at combat
         name: loc('trait_pathetic_name'),
         desc: loc('trait_pathetic'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'major',
         origin: 'imp',
         taxonomy: 'combat',
@@ -4333,6 +4466,10 @@ export const traits = {
     emotionless: { // You have no emotions, cold logic dictates your decisions
         name: loc('trait_emotionless_name'),
         desc: loc('trait_emotionless'),
+        desc_function: function(vals) {
+            vals[2] = linkTextNoColor('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
+            return vals;
+        },
         type: 'major',
         origin: 'synth',
         taxonomy: 'production',
@@ -4518,6 +4655,7 @@ export const traits = {
             vals[3] = loc('trait_living_tool_name');
             vals[4] = loc('trait_swift_name');
             vals[5] = linkTextNoColor('wiki_mechanics_job_type_basic', 'wiki.html#mechanics-gameplay-job_types');
+            vals[6] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
             return vals;
         },
         desc_extra: function(vals) {
@@ -4632,6 +4770,10 @@ export const traits = {
     bloated: {
         name: loc('trait_bloated_name'),
         desc: loc('trait_bloated'),
+        desc_extra: function(vals) {
+            return [loc('wiki_trait_effect_bloated_ex1', [rName('Food'),rName('Lumber'),rName('Stone'),rName('Furs'),rName('Copper'),rName('Iron'),
+                rName('Aluminium'),rName('Cement'),rName('Coal'),rName('Steel'),rName('Titanium'),rName('Alloy'),rName('Polymer'),rName('Iridium')])];
+        },
         type: 'major',
         origin: 'shoggoth',
         taxonomy: 'utility',
@@ -4854,16 +4996,16 @@ export const traits = {
             //Pick the right display values based on which element is currently active
             switch (vals[0]){
                 case 'electric':
-                    vals = [loc(`element_electric`), vals[1], vals[5]];
+                    vals = [loc(`element_electric`), vals[1], vals[5], linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')];
                     break;
                 case 'acid':
-                    vals = [loc(`element_acid`), vals[2], vals[5]];
+                    vals = [loc(`element_acid`), vals[2], vals[5], linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')];
                     break;
                 case 'fire':
-                    vals = [loc(`element_fire`), vals[3], vals[5]];
+                    vals = [loc(`element_fire`), vals[3], vals[5], linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')];
                     break;
                 case 'frost':
-                    vals = [loc(`element_frost`), vals[4], vals[5], loc('city_biolab')];
+                    vals = [loc(`element_frost`), vals[4], vals[5], loc('city_biolab'), linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')];
                     break;
             }
             return vals;
@@ -4871,11 +5013,11 @@ export const traits = {
         desc_extra: function(vals) {
             return [
                 loc(`wiki_trait_effect_elemental_ex1`),
-                loc(`wiki_trait_effect_elemental_ex2`, [warningText('biome_savanna_name'), warningText('biome_forest_name'), warningText('biome_swamp_name'), loc('wiki_trait_effect_elemental_acid', [warningText('element_acid'), warningTextNoLoc(vals[2]), warningTextNoLoc(vals[5])])]),
-                loc(`wiki_trait_effect_elemental_ex3`, [warningText('biome_grassland_name'), warningText('biome_desert_name'), warningText('biome_eden_name'), loc('wiki_trait_effect_elemental_electric', [warningText('element_electric'), warningTextNoLoc(vals[1]), warningTextNoLoc(vals[5])])]),
+                loc(`wiki_trait_effect_elemental_ex2`, [warningText('biome_savanna_name'), warningText('biome_forest_name'), warningText('biome_swamp_name'), loc('wiki_trait_effect_elemental_acid', [warningText('element_acid'), warningTextNoLoc(vals[2]), warningTextNoLoc(vals[5]), linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')])]),
+                loc(`wiki_trait_effect_elemental_ex3`, [warningText('biome_grassland_name'), warningText('biome_desert_name'), warningText('biome_eden_name'), loc('wiki_trait_effect_elemental_electric', [warningText('element_electric'), warningTextNoLoc(vals[1]), warningTextNoLoc(vals[5]), linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')])]),
                 loc(`wiki_trait_effect_elemental_ex4`, [warningTextNoLoc(1.28)]),
-                loc(`wiki_trait_effect_elemental_ex5`, [warningText('biome_oceanic_name'), warningText('biome_tundra_name'), warningText('biome_taiga_name'), loc('wiki_trait_effect_elemental_frost', [warningText('element_frost'), warningTextNoLoc(vals[4]), warningTextNoLoc(vals[5]), warningText('city_biolab')])]),
-                loc(`wiki_trait_effect_elemental_ex6`, [warningText('biome_volcanic_name'), warningText('biome_ashland_name'), warningText('biome_hellscape_name'), loc('wiki_trait_effect_elemental_fire', [warningText('element_fire'), warningTextNoLoc(vals[3]), warningTextNoLoc(vals[5])])])]
+                loc(`wiki_trait_effect_elemental_ex5`, [warningText('biome_oceanic_name'), warningText('biome_tundra_name'), warningText('biome_taiga_name'), loc('wiki_trait_effect_elemental_frost', [warningText('element_frost'), warningTextNoLoc(vals[4]), warningTextNoLoc(vals[5]), warningText('city_biolab'), linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')])]),
+                loc(`wiki_trait_effect_elemental_ex6`, [warningText('biome_volcanic_name'), warningText('biome_ashland_name'), warningText('biome_hellscape_name'), loc('wiki_trait_effect_elemental_fire', [warningText('element_fire'), warningTextNoLoc(vals[3]), warningTextNoLoc(vals[5]), linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')])])]
         },
         type: 'major',
         origin: 'wyvern',
@@ -4968,6 +5110,7 @@ export const traits = {
             vals[3] = loc('trait_living_tool_name');
             vals[4] = loc('trait_tusk_name');
             vals[5] = linkTextNoColor('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types');
+            vals[6] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
             return vals;
         },
         desc_extra: function(vals) {
@@ -5066,12 +5209,12 @@ export const traits = {
         desc_extra: function(vals) {
             return [
                 loc(`wiki_trait_effect_ocular_power_ex1`),
-                loc(`wiki_trait_effect_ocular_power_ex2`, [warningTextNoLoc(70)]),
-                loc(`wiki_trait_effect_ocular_power_ex3`, [warningTextNoLoc(50)]),
-                loc(`wiki_trait_effect_ocular_power_ex4`, [warningTextNoLoc(33.33), warningTextNoLoc(20), linkText('wiki_hell_strategy_ambush_odds', 'wiki.html#hell-gameplay-strategy')]),
-                loc(`wiki_trait_effect_ocular_power_ex5`, [warningTextNoLoc(100), rName('Stone')]),
-                loc(`wiki_trait_effect_ocular_power_ex6`, [warningTextNoLoc(20), warningText('job_farmer'), warningText('job_lumberjack'), warningText('job_scavenger'), warningText('job_cement_worker'), linkText('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types')]),
-                loc(`wiki_trait_effect_ocular_power_ex7`, [warningTextNoLoc(60)])];
+                loc(`wiki_trait_effect_ocular_power_ex2`, [warningTextNoLoc(+(0.70 * vals[1]).toFixed(1))]),
+                loc(`wiki_trait_effect_ocular_power_ex3`, [warningTextNoLoc(+(0.50 * vals[1]).toFixed(1)), linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating')]),
+                loc(`wiki_trait_effect_ocular_power_ex4`, [warningTextNoLoc(Math.round(vals[1] / 33.3)), warningTextNoLoc(+(0.20 * vals[1]).toFixed(1)), linkText('wiki_hell_strategy_ambush_odds', 'wiki.html#hell-gameplay-strategy')]),
+                loc(`wiki_trait_effect_ocular_power_ex5`, [warningTextNoLoc(+(1.00 * vals[1]).toFixed(1)), rName('Stone')]),
+                loc(`wiki_trait_effect_ocular_power_ex6`, [warningTextNoLoc(+(0.20 * vals[1]).toFixed(1)), warningText('job_farmer'), warningText('job_lumberjack'), warningText('job_scavenger'), warningText('job_cement_worker'), linkText('wiki_mechanics_job_type_mining', 'wiki.html#mechanics-gameplay-job_types')]),
+                loc(`wiki_trait_effect_ocular_power_ex7`, [warningTextNoLoc(+(0.60 * vals[1]).toFixed(1))])];
         },
         type: 'major',
         origin: 'beholder',
@@ -5181,6 +5324,10 @@ export const traits = {
     grenadier: {
         name: loc('trait_grenadier_name'),
         desc: loc('trait_grenadier'),
+        desc_function: function(vals) {
+            vals[1] = linkTextNoColor('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         desc_extra: function(vals) {
             return [
                 loc(`wiki_trait_effect_grenadier_ex1`, [warningText('tech_operating_base')]),
@@ -5353,6 +5500,10 @@ export const traits = {
     tactical: { // War Bonus
         name: loc('trait_tactical_name'),
         desc: loc('trait_tactical'),
+        desc_function: function(vals) {
+            vals[1] = linkText('wiki_combat_rating', 'wiki.html#combat-gameplay-rating');
+            return vals;
+        },
         type: 'minor',
         vars(r){ return [5]; },
     },
@@ -5407,6 +5558,10 @@ export const traits = {
     content: { // Morale Bonus
         name: loc('trait_content_name'),
         desc: loc('trait_content'),
+        desc_function: function(vals) {
+            vals[0] = linkText('wiki_mechanics_job_stress', 'wiki.html#mechanics-gameplay-job_stress');
+            return vals;
+        },
         type: 'minor',
     },
     fibroblast: { // Healing Bonus
@@ -5415,6 +5570,7 @@ export const traits = {
         desc_function: function(vals) {
             //Multiply by 5 for display
             vals[0] = vals[0] * 5;
+            vals[1] = linkText('wiki_combat_healing_potential', 'wiki.html#combat-gameplay-healing');
             return vals;
         },
         type: 'minor',
